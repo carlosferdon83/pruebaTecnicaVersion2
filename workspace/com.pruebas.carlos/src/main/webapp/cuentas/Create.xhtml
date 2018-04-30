@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentasCreateDlg" widgetVar="CuentasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCuentasTitle}">
+            <h:form id="CuentasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuentasController.selected != null}">
+                        <p:outputLabel value="Idcuentas" for="idcuentas" />
+                        <p:inputText id="idcuentas" value="#{cuentasController.selected.idcuentas}"  required="true" requiredMessage="Debe ingresar el id de la cuenta"/>
+                        <p:outputLabel value="Numero Cuenta" for="numerocuenta" />
+                        <p:inputText id="numerocuenta" value="#{cuentasController.selected.numerocuenta}"  required="true" requiredMessage="Debe infresar el numero de cuenta}"/>
+                        <p:outputLabel value="Saldo" for="saldo" />
+                        <p:inputText id="saldo" value="#{cuentasController.selected.saldo}"  required="true" requiredMessage="Debe ingresar el saldo"/>
+                        <p:outputLabel value="Fecha Apertura" for="fechaapertura" />
+                        <p:calendar id="fechaapertura" pattern="MM/dd/yyyy HH:mm:ss" value="#{cuentasController.selected.fechaapertura}"  required="true" requiredMessage="Debe especificar fecha de apertura}" showOn="button"/>
+                        <p:outputLabel value="Activa" for="activa" />
+                        <p:inputText id="activa" value="#{cuentasController.selected.activa}"  />
+                        <p:outputLabel value="Cliente" for="idcliente" />
+                        <p:selectOneMenu id="idcliente" value="#{cuentasController.selected.cliente}" required="true" requiredMessage="Debe ingresar el cliente">
+                            <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
+                                           var="idclienteItem"
+                                           itemValue="#{idclienteItem}" itemLabel="#{idclienteItem.numerodocumento}" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cuentasController.create}" value="Guardar" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CuentasCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="CuentasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

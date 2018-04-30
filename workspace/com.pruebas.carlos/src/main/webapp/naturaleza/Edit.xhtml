@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NaturalezaEditDlg" widgetVar="NaturalezaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Naturaleza">
+            <h:form id="NaturalezaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{naturalezaController.selected != null}">
+                        <p:outputLabel value="Idnaturaleza}" for="idnaturaleza" />
+                        <p:inputText disabled="true" id="idnaturaleza" value="#{naturalezaController.selected.idnaturaleza}" title="Idnaturaleza}" required="true" requiredMessage="Debe ingresar el id de la naturaleza"/>
+                        <p:outputLabel value="Descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{naturalezaController.selected.descripcion}" title="Descripcion}" required="true" requiredMessage="Debe ingresar la descripcion"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{naturalezaController.update}" value="Guardar" update="display,:NaturalezaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NaturalezaEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="NaturalezaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

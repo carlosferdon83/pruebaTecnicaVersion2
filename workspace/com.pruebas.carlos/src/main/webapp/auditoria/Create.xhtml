@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaCreateDlg" widgetVar="AuditoriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAuditoriaTitle}">
+            <h:form id="AuditoriaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_idauditoria}" for="idauditoria" />
+                        <p:inputText id="idauditoria" value="#{auditoriaController.selected.idauditoria}" title="#{bundle.CreateAuditoriaTitle_idauditoria}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_idauditoria}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_idmovimientos}" for="idmovimientos" />
+                        <p:inputText id="idmovimientos" value="#{auditoriaController.selected.idmovimientos}" title="#{bundle.CreateAuditoriaTitle_idmovimientos}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_idmovimientos}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_idcuentas}" for="idcuentas" />
+                        <p:inputText id="idcuentas" value="#{auditoriaController.selected.idcuentas}" title="#{bundle.CreateAuditoriaTitle_idcuentas}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_idcuentas}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_idnaturaleza}" for="idnaturaleza" />
+                        <p:inputText id="idnaturaleza" value="#{auditoriaController.selected.idnaturaleza}" title="#{bundle.CreateAuditoriaTitle_idnaturaleza}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_idnaturaleza}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{auditoriaController.selected.valor}" title="#{bundle.CreateAuditoriaTitle_valor}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fechamovimiento}" for="fechamovimiento" />
+                        <p:calendar id="fechamovimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditoriaController.selected.fechamovimiento}" title="#{bundle.EditAuditoriaTitle_fechamovimiento}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_fechamovimiento}" showOn="button"/>
+                    </p:panelGrid>
+                    <b:commandButton look="primary" actionListener="#{auditoriaController.create}" value="Guardar" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuditoriaCreateDialog');"/>
+                    <b:commandButton look="danger" value="Cancelar" onclick="AuditoriaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

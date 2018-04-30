@@ -1,0 +1,201 @@
+package com.pruebas.carlos.mb;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
+
+import com.pruebas.carlos.entities.Usuario;
+import com.pruebas.carlos.factory.Factory;
+import com.pruebas.carlos.interfaces.IUsuarios;
+import com.pruebas.carlos.util.JsfUtil;
+import com.pruebas.carlos.util.JsfUtil.PersistAction;
+
+@ManagedBean(name = "usuariosController")
+@SessionScoped
+public class UsuariosController {
+	
+	private List<Usuario> items = null;
+    private Usuario selected,validar;
+	private Factory factory;
+    private IUsuarios usuarios;
+
+    @PostConstruct
+    public void init() {
+    	Factory factory = new Factory();
+    	usuarios = factory.obtenerUsuarios();
+    	validar = new Usuario();
+    }
+
+    public Usuario getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Usuario selected) {
+        this.selected = selected;
+    }
+
+    protected void setEmbeddableKeys() {
+    }
+
+    protected void initializeEmbeddableKey() {
+    }
+
+    
+    public Usuario prepareCreate() {
+        selected = new Usuario();
+        initializeEmbeddableKey();
+        return selected;
+    }    
+    
+
+    public void create() {
+        persist(PersistAction.CREATE, "Registro Exitoso");
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+    
+    public void validarUsuario(ActionEvent event) throws IOException {    	
+        Usuario datoUsuario =usuarios.validarUsuario(validar.getLogin(), validar.getPass());
+        if (datoUsuario == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Atencion", "Las credenciales para el usuario son incorrectas"));
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("faces/template.xhtml");
+        }
+    }
+
+    public void update() {
+        persist(PersistAction.UPDATE, "Actualizacion Exitosa");
+    }
+
+    public void destroy() {
+        persist(PersistAction.DELETE, "Registro Eliminado");
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+
+    public List<Usuario> getItems() {
+        if (items == null) {
+            items = usuarios.listaUsuarios();
+        }
+        return items;
+    }
+
+    private void persist(PersistAction persistAction, String successMessage) {
+        if (selected != null) {
+            setEmbeddableKeys();
+            try {
+                if (persistAction == PersistAction.DELETE) {
+                    usuarios.edit(selected);
+                } 
+                if (persistAction == PersistAction.UPDATE){
+                    usuarios.remove(selected);
+                }
+            	if (persistAction == PersistAction.CREATE){
+            		usuarios.create(selected);
+            	}
+                JsfUtil.addSuccessMessage(successMessage);
+            } catch (Exception ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, "Error de persistencia");
+                }
+            }
+        }
+    }
+
+    public List<Usuario> getItemsAvailableSelectMany() {
+        return usuarios.listaUsuarios();
+    }
+
+    public List<Usuario> getItemsAvailableSelectOne() {
+        return usuarios.listaUsuarios();
+    }
+
+    @FacesConverter(forClass = Usuario.class)
+    public static class UsuarioControllerConverter implements Converter {
+
+        @Override
+        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+            if (value == null || value.length() == 0) {
+                return null;
+            }
+            UsuariosController controller = (UsuariosController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "usuariosController");
+            return controller.usuarios.find(getKey(value));
+        }
+
+        java.math.BigDecimal getKey(String value) {
+            java.math.BigDecimal key;
+            key = new java.math.BigDecimal(value);
+            return key;
+        }
+
+        String getStringKey(long l) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(l);
+            return sb.toString();
+        }
+
+        @Override
+        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+            if (object == null) {
+                return null;
+            }
+            if (object instanceof Usuario) {
+                Usuario o = (Usuario) object;
+                return getStringKey(o.getIdusuarios());
+            } else {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Usuario.class.getName()});
+                return null;
+            }
+        }
+
+    }
+    
+    public Factory getFactory() {
+        return factory;
+    }
+
+    public void setFactory(Factory factory) {
+        this.factory = factory;
+    }
+
+	public IUsuarios getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(IUsuarios usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario getValidar() {
+		return validar;
+	}
+
+	public void setValidar(Usuario validar) {
+		this.validar = validar;
+	}
+
+	
+
+}

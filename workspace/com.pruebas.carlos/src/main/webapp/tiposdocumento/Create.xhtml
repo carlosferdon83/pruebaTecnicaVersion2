@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TiposdocumentoCreateDlg" widgetVar="TiposdocumentoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTiposdocumentoTitle}">
+            <h:form id="TiposdocumentoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tiposDocumentoController.selected != null}">
+                        <p:outputLabel value="Id Tipo" for="idtipodocumento" />
+                        <p:inputText id="idtipodocumento" value="#{tiposDocumentoController.selected.idtipodocumento}" title="#{bundle.CreateTiposdocumentoTitle_idtipodocumento}" required="true" requiredMessage="#{bundle.CreateTiposdocumentoRequiredMessage_idtipodocumento}"/>
+                        <p:outputLabel value="Descripcion" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tiposDocumentoController.selected.descripcion}" title="#{bundle.CreateTiposdocumentoTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateTiposdocumentoRequiredMessage_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tiposDocumentoController.create}" value="Guardar" update="display,:TiposdocumentoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TiposdocumentoCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="TiposdocumentoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

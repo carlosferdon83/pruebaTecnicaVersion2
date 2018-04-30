@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaEditDlg" widgetVar="AuditoriaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAuditoriaTitle}">
+            <h:form id="AuditoriaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_idauditoria}" for="idauditoria" />
+                        <p:inputText disabled="true" id="idauditoria" value="#{auditoriaController.selected.idauditoria}" title="#{bundle.EditAuditoriaTitle_idauditoria}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idauditoria}"/>
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_idmovimientos}" for="idmovimientos" />
+                        <p:inputText id="idmovimientos" value="#{auditoriaController.selected.idmovimientos}" title="#{bundle.EditAuditoriaTitle_idmovimientos}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idmovimientos}"/>
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_idcuentas}" for="idcuentas" />
+                        <p:inputText id="idcuentas" value="#{auditoriaController.selected.idcuentas}" title="#{bundle.EditAuditoriaTitle_idcuentas}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idcuentas}"/>
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_idnaturaleza}" for="idnaturaleza" />
+                        <p:inputText id="idnaturaleza" value="#{auditoriaController.selected.idnaturaleza}" title="#{bundle.EditAuditoriaTitle_idnaturaleza}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idnaturaleza}"/>
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{auditoriaController.selected.valor}" title="#{bundle.EditAuditoriaTitle_valor}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_fechamovimiento}" for="fechamovimiento" />
+                        <p:calendar id="fechamovimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditoriaController.selected.fechamovimiento}" title="#{bundle.EditAuditoriaTitle_fechamovimiento}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_fechamovimiento}" showOn="button"/>
+                    </p:panelGrid>
+                    <b:commandButton look="primary" actionListener="#{auditoriaController.update}" value="Guardar" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AuditoriaEditDialog');"/>
+                    <b:commandButton look="danger" value="Cancelar" onclick="AuditoriaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

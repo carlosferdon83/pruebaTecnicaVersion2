@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MovimientosEditDlg" widgetVar="MovimientosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Movimientos">
+            <h:form id="MovimientosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{movimientosController.selected != null}">
+                        <p:outputLabel value="Idmovimientos" for="idmovimientos" />
+                        <p:inputText disabled="true" id="idmovimientos" value="#{movimientosController.selected.idmovimientos}" required="true" requiredMessage="Debe seleccionar la clase de movimiento"/>
+                        <p:outputLabel value="Valor" for="valor" />
+                        <p:inputText id="valor" value="#{movimientosController.selected.valor}" required="true" requiredMessage="Debe ingresar el valor}"/>
+                        <p:outputLabel value="Fecha Movimiento" for="fechamovimiento" />
+                        <p:calendar id="fechamovimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{movimientosController.selected.fechamovimiento}" required="true" requiredMessage="Debe seleccionar la fecha movimiento}" showOn="button"/>
+                        <p:outputLabel value="Cuentas}" for="idcuentas" />
+                        <p:selectOneMenu id="idcuentas" value="#{movimientosController.selected.cuenta}" required="true" requiredMessage="Debe seleccionar la cuenta}">
+                            <f:selectItem itemLabel="Seleccione..."/>
+                            <f:selectItems value="#{cuentasController.itemsAvailableSelectOne}"
+                                           var="idcuentasItem"
+                                           itemValue="#{idcuentasItem}" itemLabel="#{idcuentasItem.numerocuenta}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Naturaleza" for="idnaturaleza" />
+                        <p:selectOneMenu id="idnaturaleza" value="#{movimientosController.selected.naturaleza}" required="true" requiredMessage="Debe seleccionar la naturaleza">
+                            <f:selectItem itemLabel="Seleccione..."/>
+                            <f:selectItems value="#{naturalezaController.itemsAvailableSelectOne}"
+                                           var="idnaturalezaItem"
+                                           itemValue="#{idnaturalezaItem}" itemLabel="#{idnaturalezaItem.descripcion}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{movimientosController.update}" value="Guardar" update="display,:MovimientosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MovimientosEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="MovimientosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MovimientosViewDlg" widgetVar="MovimientosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Detalle Movimientos">
+            <h:form id="MovimientosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{movimientosController.selected != null}">
+                        <h:outputText value="Idmovimientos}"/>
+                        <h:outputText value="#{movimientosController.selected.idmovimientos}" />
+                        <h:outputText value="Valor"/>
+                        <h:outputText value="#{movimientosController.selected.valor}" />
+                        <h:outputText value="Fecha Movimiento"/>
+                        <h:outputText value="#{movimientosController.selected.fechamovimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="Cuenta"/>
+                        <h:outputText value="#{movimientosController.selected.cuenta}" />
+                        <h:outputText value="Naturaleza"/>
+                        <h:outputText value="#{movimientosController.selected.naturaleza}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Cerrar" onclick="MovimientosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

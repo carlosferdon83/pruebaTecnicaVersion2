@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<br></br>
+	<br></br>
+	<h:form prependId="">
+		<b:row>
+			<b:column span="3" />
+			<b:column span="6">
+				<b:panel title="Acceso Sistema" look="primary" collapsible="false">
+					<b:row>
+						<b:column medium-screen="15">
+							<b:panelGrid columns="1">
+								<b:inputText id="usuario" span="6" label="Usuario"
+									value="#{usuariosController.validar.login}" required="true"
+									requiredMessage="Debe ingresar el usuario">
+									<f:facet name="prepend">
+										<b:icon name="user" />
+									</f:facet>
+								</b:inputText>
+								<b:inputSecret id="contraseña" span="6" label="Contraseña"
+									value="#{usuariosController.validar.pass}" required="true"
+									requiredMessage="Debe ingresar la contraseña">
+									<f:facet name="prepend">
+										<b:iconAwesome name="key" />
+									</f:facet>
+								</b:inputSecret>
+							</b:panelGrid>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="15">
+							<b:messages />
+						</b:column>
+					</b:row>
+					<f:facet name="footer">
+						<b:commandButton value="Aceptar" update="@form" look="warning" style="width:180px;"
+							actionListener="#{usuariosController.validarUsuario(event)}" />
+					</f:facet>
+				</b:panel>
+			</b:column>
+			<b:column span="3" />
+		</b:row>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentasViewDlg" widgetVar="CuentasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCuentasTitle}">
+            <h:form id="CuentasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuentasController.selected != null}">
+                        <h:outputText value="Idcuentas"/>
+                        <h:outputText value="#{cuentasController.selected.idcuentas}" title="#{bundle.ViewCuentasTitle_idcuentas}"/>
+                        <h:outputText value="Numero Cuenta}"/>
+                        <h:outputText value="#{cuentasController.selected.numerocuenta}" title="#{bundle.ViewCuentasTitle_numerocuenta}"/>
+                        <h:outputText value="Saldo"/>
+                        <h:outputText value="#{cuentasController.selected.saldo}" title="#{bundle.ViewCuentasTitle_saldo}"/>
+                        <h:outputText value="Fecha Apertura"/>
+                        <h:outputText value="#{cuentasController.selected.fechaapertura}" title="#{bundle.ViewCuentasTitle_fechaapertura}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="Activa"/>
+                        <h:outputText value="#{cuentasController.selected.activa}" title="#{bundle.ViewCuentasTitle_activa}"/>
+                        <h:outputText value="Cliente"/>
+                        <h:outputText value="#{cuentasController.selected.cliente}" title="#{bundle.ViewCuentasTitle_idcliente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Cerrar" onclick="CuentasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

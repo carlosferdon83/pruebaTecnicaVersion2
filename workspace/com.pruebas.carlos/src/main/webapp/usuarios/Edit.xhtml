@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsuariosTitle}">
+            <h:form id="UsuariosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_idusuarios}" for="idusuarios" />
+                        <p:inputText id="idusuarios" value="#{usuariosController.selected.idusuarios}" title="#{bundle.EditUsuariosTitle_idusuarios}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idusuarios}"/>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_login}" for="login" />
+                        <p:inputText id="login" value="#{usuariosController.selected.login}" title="#{bundle.EditUsuariosTitle_login}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_login}"/>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_pass}" for="pass" />
+                        <p:inputText id="pass" value="#{usuariosController.selected.pass}" title="#{bundle.EditUsuariosTitle_pass}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_pass}"/>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_rol}" for="rol" />
+                        <p:inputText id="rol" value="#{usuariosController.selected.rol}" title="#{bundle.EditUsuariosTitle_rol}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_rol}"/>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_idclientes}" for="idclientes" />
+                        <p:selectOneMenu id="idclientes" value="#{usuariosController.selected.idclientes}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idclientes}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
+                                           var="idclientesItem"
+                                           itemValue="#{idclientesItem}" itemLabel="#{idclientesItem.numerodocumento}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <b:commandButton look="primary" actionListener="#{usuariosController.update}" value="Guardar" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuariosEditDialog');"/>
+                    <b:commandButton look="info" value="Cancelar" onclick="UsuariosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MovimientosCreateDlg" widgetVar="MovimientosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMovimientosTitle}">
+            <h:form id="MovimientosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{movimientosController.selected != null}">
+                        
+                        <p:outputLabel value="Valor" for="valor" />
+                        <p:inputText id="valor" value="#{movimientosController.selected.valor}" required="true" requiredMessage="Debe ingresar el valor}"/>
+                        <p:outputLabel value="Fecha Movimiento" for="fechamovimiento" />
+                        <p:calendar id="fechamovimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{movimientosController.selected.fechamovimiento}" required="true" requiredMessage="Fecha Movimiento}" showOn="button"/>
+                        <p:outputLabel value="Cuenta" for="idcuentas" />
+                        <p:selectOneMenu id="idcuentas" value="#{movimientosController.selected.cuenta}" required="true" requiredMessage="Debe Ingresar la cuenta}">
+                            <f:selectItems value="#{cuentasController.itemsAvailableSelectOne}"
+                                           var="idcuentasItem"
+                                           itemValue="#{idcuentasItem}" itemLabel="#{idcuentasItem.numerocuenta}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Naturaleza}" for="idnaturaleza" />
+                        <p:selectOneMenu id="idnaturaleza" value="#{movimientosController.selected.naturaleza}" required="true" requiredMessage="Debe ingresar la naturaleza">
+                            <f:selectItems value="#{naturalezaController.itemsAvailableSelectOne}"
+                                           var="idnaturalezaItem"
+                                           itemValue="#{idnaturalezaItem}" itemLabel="#{idnaturalezaItem.descripcion}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{movimientosController.create}" value="Guardar" update="display,:MovimientosListForm:datalist,:growl" oncomplete="handleSubmit(args,'MovimientosCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="MovimientosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

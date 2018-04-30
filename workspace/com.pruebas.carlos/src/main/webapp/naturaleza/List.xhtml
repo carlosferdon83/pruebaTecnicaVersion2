@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Lista Naturaleza"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="NaturalezaListForm">
+                <b:panel look="primary" title="Lista Naturaleza">
+                    <p:dataTable id="datalist" value="#{naturalezaController.items}" var="item"
+                                 selectionMode="single" selection="#{naturalezaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idnaturaleza}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column headerText="Idnaturaleza">                            
+                            <h:outputText value="#{item.idnaturaleza}"/>
+                        </p:column>
+                        <p:column headerText="Descripcion">                            
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{naturalezaController.prepareCreate}" update=":NaturalezaCreateForm" oncomplete="PF('NaturalezaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":NaturalezaViewForm" oncomplete="PF('NaturalezaViewDialog').show()" disabled="#{empty naturalezaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":NaturalezaEditForm" oncomplete="PF('NaturalezaEditDialog').show()" disabled="#{empty naturalezaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{naturalezaController.destroy}" update=":growl,datalist" disabled="#{empty naturalezaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </b:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

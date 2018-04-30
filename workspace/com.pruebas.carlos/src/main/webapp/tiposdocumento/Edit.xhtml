@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TiposdocumentoEditDlg" widgetVar="TiposdocumentoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTiposdocumentoTitle}">
+            <h:form id="TiposdocumentoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tiposDocumentoController.selected != null}">
+                        <p:outputLabel value="Idtipodocumento" for="idtipodocumento" />
+                        <p:inputText id="idtipodocumento" value="#{tiposDocumentoController.selected.idtipodocumento}" title="Id tipo documento" required="true" requiredMessage="El id es obligatorio"/>
+                        <p:outputLabel value="Descripcion" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tiposDocumentoController.selected.descripcion}" title="Descripcion" required="true" requiredMessage="La descripcion es obligatoria"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tiposDocumentoController.update}" value="Guardar" update="display,:TiposdocumentoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TiposdocumentoEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="TiposdocumentoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

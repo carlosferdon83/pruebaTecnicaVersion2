@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientesEditDlg" widgetVar="ClientesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClientesTitle}">
+            <h:form id="ClientesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditClientesLabel_idcliente}" for="idcliente" />
+                        <p:inputText disabled="true" id="idcliente" value="#{clientesController.selected.idcliente}" title="#{bundle.EditClientesTitle_idcliente}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idcliente}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_numerodocumento}" for="numerodocumento" />
+                        <p:inputText id="numerodocumento" value="#{clientesController.selected.numerodocumento}" title="#{bundle.EditClientesTitle_numerodocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_numerodocumento}"/>
+                        <p:selectOneMenu id="idtipodocumento" value="#{clientesController.selected.tiposdocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idtipodocumento}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tiposdocumentoController.itemsAvailableSelectOne}"
+                                           var="idtipodocumentoItem"
+                                           itemValue="#{idtipodocumentoItem}" itemLabel="#{idtipodocumentoItem.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_primerapellido}" for="primerapellido" />
+                        <p:inputText id="primerapellido" value="#{clientesController.selected.primerapellido}" title="#{bundle.EditClientesTitle_primerapellido}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_primerapellido}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_segundoapellido}" for="segundoapellido" />
+                        <p:inputText id="segundoapellido" value="#{clientesController.selected.segundoapellido}" title="#{bundle.EditClientesTitle_segundoapellido}" />
+                        <p:outputLabel value="#{bundle.EditClientesLabel_primernombre}" for="primernombre" />
+                        <p:inputText id="primernombre" value="#{clientesController.selected.primernombre}" title="#{bundle.EditClientesTitle_primernombre}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_primernombre}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_segundonombre}" for="segundonombre" />
+                        <p:inputText id="segundonombre" value="#{clientesController.selected.segundonombre}" title="#{bundle.EditClientesTitle_segundonombre}" />
+                        <p:outputLabel value="#{bundle.EditClientesLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{clientesController.selected.correo}" title="#{bundle.EditClientesTitle_correo}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_correo}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_idtipodocumento}" for="idtipodocumento" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientesController.update}" value="Guardar" update="display,:ClientesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientesEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="ClientesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
