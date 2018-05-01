@@ -11,7 +11,7 @@ import com.pruebas.carlos.interfaces.IUsuarios;
 
 public class IUsuariosImpl implements IUsuarios {
 	
-	private static final String PERSISTENCE_UNIT_NAME = "com.pruebas.carlos";
+	private static final String PERSISTENCE_UNIT_NAME = "com.pruebas.carlos";;
     private static final EntityManager entityMgrObj = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
     private static final EntityTransaction transactionObj = entityMgrObj.getTransaction();
     
@@ -21,7 +21,7 @@ public class IUsuariosImpl implements IUsuarios {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> listaUsuarios() {
-		Query queryObj = entityMgrObj.createQuery("SELECT t FROM Usuario t");
+		Query queryObj = entityMgrObj.createQuery("SELECT t FROM Tiposdocumento t");
         List<Usuario> lista = queryObj.getResultList();
         if (lista != null && lista.size() > 0) {
             return lista;
