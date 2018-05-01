@@ -52,13 +52,13 @@
                             <f:facet name="header">
                                 <h:outputText value="Cuentas"/>
                             </f:facet>
-                            <h:outputText value="#{item.cuenta}"/>
+                            <h:outputText value="#{item.cuenta.numerocuenta}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Naturaleza"/>
                             </f:facet>
-                            <h:outputText value="#{item.naturaleza}"/>
+                            <h:outputText value="#{item.naturaleza.descripcion}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{movimientosController.prepareCreate}" update=":MovimientosCreateForm" oncomplete="PF('MovimientosCreateDialog').show()"/>

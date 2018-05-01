@@ -61,15 +61,16 @@ public class MovimientosController {
     }
     
     
-    public boolean validation(){
-        boolean falso = false;
+    public boolean validation(){        
         Cuenta datoCuenta = cuenta.obtenerSaldoCuenta(selected.getCuenta().getIdcuentas());
-        int valorComparacion = datoCuenta.getSaldo().compareTo(selected.getValor());
-        if(valorComparacion == 1 && selected.getNaturaleza().getIdnaturaleza()==2){
-            return true;        
-        }
+        double saldo = datoCuenta.getSaldo().doubleValue();;
+        double transaccion = selected.getValor().doubleValue();
+        if(saldo < transaccion && selected.getNaturaleza().getIdnaturaleza()==2){        	
+            return false;        
+        }else{
+        	return true;
+        }       
         
-        return falso;
     }
 
     public void create() {        
@@ -77,7 +78,7 @@ public class MovimientosController {
             persist(PersistAction.CREATE, "Movimiento Registrado");
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
-            }
+            }            
        }else{
             JsfUtil.addErrorMessage("No tiene suficiente saldo para la transaccion");
         }    

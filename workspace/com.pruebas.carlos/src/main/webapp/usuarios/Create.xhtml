@@ -9,27 +9,27 @@
 
     <ui:composition>
 
-        <p:dialog id="UsuariosCreateDlg" widgetVar="UsuariosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuariosTitle}">
+        <p:dialog id="UsuariosCreateDlg" widgetVar="UsuariosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Registro Usuarios">
             <h:form id="UsuariosCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_idusuarios}" for="idusuarios" />
-                        <p:inputText id="idusuarios" value="#{usuariosController.selected.idusuarios}" title="#{bundle.CreateUsuariosTitle_idusuarios}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_idusuarios}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_login}" for="login" />
-                        <p:inputText id="login" value="#{usuariosController.selected.login}" title="#{bundle.CreateUsuariosTitle_login}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_login}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_pass}" for="pass" />
-                        <p:inputText id="pass" value="#{usuariosController.selected.pass}" title="#{bundle.CreateUsuariosTitle_pass}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_pass}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_rol}" for="rol" />
-                        <p:inputText id="rol" value="#{usuariosController.selected.rol}" title="#{bundle.CreateUsuariosTitle_rol}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_rol}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_idclientes}" for="idclientes" />
-                        <p:selectOneMenu id="idclientes" value="#{usuariosController.selected.idclientes}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idclientes}">
+                        <p:outputLabel value="Idusuarios" for="idusuarios" />
+                        <p:inputText id="idusuarios" value="#{usuariosController.selected.idusuarios}" required="true" requiredMessage="Ingrese el id del usuario"/>
+                        <p:outputLabel value="Usuario" for="login" />
+                        <p:inputText id="login" value="#{usuariosController.selected.login}" required="true" requiredMessage="Debe ingresar el usuario"/>
+                        <p:outputLabel value="Contraseña" for="pass" />
+                        <p:inputText id="pass" value="#{usuariosController.selected.pass}" required="true" requiredMessage="Debe ingresar la contrario"/>
+                        <p:outputLabel value="Rol" for="rol" />
+                        <p:inputText id="rol" value="#{usuariosController.selected.rol}" required="true" requiredMessage="Debe ingresar el rol"/>
+                        <p:outputLabel value="Cliente" for="idclientes" />
+                        <p:selectOneMenu id="idclientes" value="#{usuariosController.selected.cliente}" required="true" requiredMessage="Debe seleccionar el cliente">
                             <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
                                            var="idclientesItem"
-                                           itemValue="#{idclientesItem}" itemLabel="#{idclientesItem.numerodocumento}"/>
+                                           itemValue="#{idclientesItem}" itemLabel="#{idclientesItem.numerodocumento} - #{idclientesItem.primernombre} #{idclientesItem.primerapellido} "/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <b:commandButton look="primary" actionListener="#{usuariosController.create}" value="Guardar" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
-                    <b:commandButton look="info" value="Cancelar" onclick="UsuariosCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{usuariosController.create}" value="Guardar" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="UsuariosCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

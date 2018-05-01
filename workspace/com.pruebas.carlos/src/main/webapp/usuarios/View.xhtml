@@ -8,22 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="UsuariosViewDlg" widgetVar="UsuariosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUsuariosTitle}">
+        <p:dialog id="UsuariosViewDlg" widgetVar="UsuariosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Vista Usuarios">
             <h:form id="UsuariosViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUsuariosLabel_idusuarios}"/>
-                        <h:outputText value="#{usuariosController.selected.idusuarios}" title="#{bundle.ViewUsuariosTitle_idusuarios}"/>
-                        <h:outputText value="#{bundle.ViewUsuariosLabel_login}"/>
-                        <h:outputText value="#{usuariosController.selected.login}" title="#{bundle.ViewUsuariosTitle_login}"/>
-                        <h:outputText value="#{bundle.ViewUsuariosLabel_pass}"/>
-                        <h:outputText value="#{usuariosController.selected.pass}" title="#{bundle.ViewUsuariosTitle_pass}"/>
-                        <h:outputText value="#{bundle.ViewUsuariosLabel_rol}"/>
-                        <h:outputText value="#{usuariosController.selected.rol}" title="#{bundle.ViewUsuariosTitle_rol}"/>
-                        <h:outputText value="#{bundle.ViewUsuariosLabel_idclientes}"/>
-                        <h:outputText value="#{usuariosController.selected.idclientes}" title="#{bundle.ViewUsuariosTitle_idclientes}"/>
+                        <h:outputText value="Idusuarios"/>
+                        <h:outputText value="#{usuariosController.selected.idusuarios}" />
+                        <h:outputText value="Usuarios"/>
+                        <h:outputText value="#{usuariosController.selected.login}" />
+                        <h:outputText value="Contraseña"/>
+                        <h:outputText value="*************" />
+                        <h:outputText value="Rol"/>
+                        <h:outputText value="#{usuariosController.selected.rol}" />
+                        <h:outputText value="Clientes"/>
+                        <h:outputText value="#{usuariosController.selected.cliente}" />
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UsuariosViewDialog.hide()"/>
+                    <p:commandButton value="Cerrar" onclick="UsuariosViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

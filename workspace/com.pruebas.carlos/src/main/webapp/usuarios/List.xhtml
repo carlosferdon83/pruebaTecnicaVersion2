@@ -16,7 +16,7 @@
 
         <ui:define name="body">
             <h:form id="UsuariosListForm">
-                <b:panel look="primary" title="#{bundle.ListUsuariosTitle}">
+                <b:panel look="primary" title="Lista Usuarios">
                     <p:dataTable id="datalist" value="#{usuariosController.items}" var="item"
                                  selectionMode="single" selection="#{usuariosController.selected}"
                                  paginator="true"
@@ -30,33 +30,27 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_idusuarios}"/>
+                                <h:outputText value="Idusuarios"/>
                             </f:facet>
                             <h:outputText value="#{item.idusuarios}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_login}"/>
+                                <h:outputText value="Usuario"/>
                             </f:facet>
                             <h:outputText value="#{item.login}"/>
-                        </p:column>
+                        </p:column>                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_pass}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pass}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_rol}"/>
+                                <h:outputText value="Rol}"/>
                             </f:facet>
                             <h:outputText value="#{item.rol}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_idclientes}"/>
+                                <h:outputText value="Cliente"/>
                             </f:facet>
-                            <h:outputText value="#{item.idclientes}"/>
+                            <h:outputText value="#{item.cliente.primernombre} #{item.cliente.primerapellido}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{usuariosController.prepareCreate}" update=":UsuariosCreateForm" oncomplete="PF('UsuariosCreateDialog').show()"/>
