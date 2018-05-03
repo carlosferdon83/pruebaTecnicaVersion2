@@ -5,83 +5,129 @@
 	<artifactId>pruebasCarlos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<properties>
+		<eclipselink.version>2.5.0</eclipselink.version>
+	</properties>
 	<dependencies>
+	
+	<!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>persistence-api</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
+			
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>${eclipselink.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.core</artifactId>
+			<version>${eclipselink.version}</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.4.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>net.bootsfaces</groupId>
-			<artifactId>bootsfaces</artifactId>
-			<version>1.2.0</version>
+			<version>${eclipselink.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
-        <dependency>
-      <groupId>org.eclipse.persistence</groupId>
-      <artifactId>javax.persistence</artifactId>
-      <version>2.1.0</version>
-    </dependency>
-		
-		
-<!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
-<dependency>
-    <groupId>oracle</groupId>
-    <artifactId>ojdbc6</artifactId>
-    <version>11.2.0.3</version>
-</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+			<version>${eclipselink.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.moxy</artifactId>
+			<version>${eclipselink.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.sdo</artifactId>
+			<version>${eclipselink.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.oracle</artifactId>
+			<version>${eclipselink.version}</version>
+			<scope>compile</scope>
+		</dependency>
 
+	
 		
-		
-<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
-<dependency>
-    <groupId>org.eclipse.persistence</groupId>
-    <artifactId>eclipselink</artifactId>
-    <version>2.5.0</version>
-</dependency>
+	
 
 
-		
-		
-		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.el/el-api -->
-<dependency>
-    <groupId>javax.el</groupId>
-    <artifactId>el-api</artifactId>
-    <version>2.2.1-b02</version>
-</dependency>
-		<dependency>  
-    <groupId>org.primefaces.themes</groupId>  
-    <artifactId>bootstrap</artifactId>  
-    <version>1.0.8</version>  
-</dependency>
+
+	<dependency>
+		<groupId>com.sun.faces</groupId>
+		<artifactId>jsf-api</artifactId>
+		<version>2.2.2</version>
+	</dependency>
+
+	<dependency>
+		<groupId>net.bootsfaces</groupId>
+		<artifactId>bootsfaces</artifactId>
+		<version>1.2.0</version>
+		<scope>compile</scope>
+	</dependency>
+
+
+	<dependency>
+		<groupId>javax</groupId>
+		<artifactId>javaee-api</artifactId>
+		<version>6.0</version>
+	</dependency>
+
+
+
+	<dependency>
+		<groupId>org.primefaces</groupId>
+		<artifactId>primefaces</artifactId>
+		<version>5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.faces</groupId>
+		<artifactId>jsf-impl</artifactId>
+		<version>2.2.2</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.el/el-api -->
+	<dependency>
+		<groupId>javax.el</groupId>
+		<artifactId>el-api</artifactId>
+		<version>2.2.1-b02</version>
+	</dependency>
+	<dependency>
+		<groupId>org.primefaces.themes</groupId>
+		<artifactId>bootstrap</artifactId>
+		<version>1.0.8</version>
+	</dependency>
+
+
+
+	<dependency>
+		<groupId>javax.persistence</groupId>
+		<artifactId>javax.persistence-api</artifactId>
+		<version>2.2</version>
+	</dependency>
 	</dependencies>
 	<name>pruebasCarlos</name>
 	<build>
@@ -101,6 +147,10 @@
 			<id>PrimeFaces-maven-lib</id>
 			<layout>default</layout>
 			<name>Repository for library PrimeFaces-maven-lib</name>
+		</repository>
+		<repository>
+			<id>EclipseLink</id>
+			<url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
 		</repository>
 	</repositories>
 </project>

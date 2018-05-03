@@ -1,5 +1,6 @@
 package com.pruebas.carlos.mb;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +21,12 @@ import com.pruebas.carlos.util.JsfUtil.PersistAction;
 
 @ManagedBean(name = "auditoriaController")
 @SessionScoped
-public class AuditoriaController {
+public class AuditoriaController implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4356454381250032123L;
 	private List<Auditoria> items = null;
     private Auditoria selected;
     private Factory factory;

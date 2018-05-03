@@ -1,5 +1,6 @@
 package com.pruebas.carlos.mb;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,8 +23,12 @@ import com.pruebas.carlos.util.JsfUtil.PersistAction;
 
 @ManagedBean(name = "movimientosController")
 @SessionScoped
-public class MovimientosController {
+public class MovimientosController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7886298125465708609L;
 	private List<Movimiento> items = null;
     private Movimiento selected;
     private Cuenta cuentas;

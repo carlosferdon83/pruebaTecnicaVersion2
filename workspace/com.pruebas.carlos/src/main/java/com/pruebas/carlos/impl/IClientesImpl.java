@@ -1,5 +1,6 @@
 package com.pruebas.carlos.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,8 +11,12 @@ import javax.persistence.Query;
 import com.pruebas.carlos.entities.Cliente;
 import com.pruebas.carlos.interfaces.IClientes;
 
-public class IClientesImpl implements IClientes {
+public class IClientesImpl implements IClientes, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5689747170509117033L;
 	private static final String PERSISTENCE_UNIT_NAME = "com.pruebas.carlos";;
     private static final EntityManager entityMgrObj = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
     private static final EntityTransaction transactionObj = entityMgrObj.getTransaction();

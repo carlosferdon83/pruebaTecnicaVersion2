@@ -1,6 +1,7 @@
 package com.pruebas.carlos.mb;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,12 @@ import com.pruebas.carlos.util.JsfUtil.PersistAction;
 
 @ManagedBean(name = "usuariosController")
 @SessionScoped
-public class UsuariosController {
+public class UsuariosController implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 664662680872968465L;
 	private List<Usuario> items = null;
     private Usuario selected,validar;
 	private Factory factory;

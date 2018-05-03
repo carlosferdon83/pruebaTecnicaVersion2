@@ -4,14 +4,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="com.pruebas.carlos" transaction-type="RESOURCE_LOCAL">
 		  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		  <class>com.pruebas.carlos.entities.Auditoria</class>
+		  <class>com.pruebas.carlos.entities.Usuario</class>
+		  <class>com.pruebas.carlos.entities.Cliente</class>
+		  <class>com.pruebas.carlos.entities.Cuenta</class>
+		  <class>com.pruebas.carlos.entities.Movimiento</class>
+		  <class>com.pruebas.carlos.entities.Naturaleza</class>
+		  <class>com.pruebas.carlos.entities.Tiposdocumento</class>	
 		
-		<class>com.pruebas.carlos.entities.Auditoria</class>
-		<class>com.pruebas.carlos.entities.Cliente</class>
-		<class>com.pruebas.carlos.entities.Cuenta</class>
-		<class>com.pruebas.carlos.entities.Movimiento</class>
-		<class>com.pruebas.carlos.entities.Naturaleza</class>
-		<class>com.pruebas.carlos.entities.Tiposdocumento</class>
-		<class>com.pruebas.carlos.entities.Usuario</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 			<property name="javax.persistence.jdbc.user" value="pruebas"/>

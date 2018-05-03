@@ -3,6 +3,7 @@ package com.pruebas.carlos.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -11,11 +12,16 @@ import com.pruebas.carlos.interfaces.IUsuarios;
 
 public class IUsuariosImpl implements IUsuarios {
 	
-	private static final String PERSISTENCE_UNIT_NAME = "com.pruebas.carlos";
-    private static final EntityManager entityMgrObj = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
-    private static final EntityTransaction transactionObj = entityMgrObj.getTransaction();
+	static String persistence; 
+    static EntityManager entityMgrObj; 
+    static EntityManagerFactory emf;
+    static EntityTransaction transactionObj; 
     
-    public IUsuariosImpl(){    	
+    public IUsuariosImpl(){   
+    	persistence = "com.pruebas.carlos";
+    	emf = Persistence.createEntityManagerFactory(persistence);
+    	entityMgrObj = emf.createEntityManager();
+    	transactionObj = entityMgrObj.getTransaction();
     }
 
 	@SuppressWarnings("unchecked")
